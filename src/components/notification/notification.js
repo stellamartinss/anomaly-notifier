@@ -13,10 +13,9 @@ const Notification = () => {
     const getNotifications = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/anomaly-service',
+          'http://localhost:300/anomaly-service',
         )
-
-        setNotifications(response.data)
+        setNotifications(response.data.data)
       } catch (error) {
         console.error('Error fetching notifications:', error)
       }

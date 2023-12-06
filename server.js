@@ -8,17 +8,44 @@ const PORT = 3001
 server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
-server.get('/anomaly-service', (req, res) => {
+server.get('/anomaly-service-all', (req, res) => {
   const allNotifications = router.db.get('anomaly-service').value()
   res.json({ data: allNotifications })
 })
 
 server.get('/anomaly-service/:orgId', (req, res) => {
-  res.json({ data: [] })
+  try {
+    const { orgId } = req.params
+    const db = router.db
+    const anomalyService = db.get('anomaly-service').value()
+
+
+    res.json({ data: anomalyService })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 })
 
 server.get('/anomaly-service/:orgId/unread', (req, res) => {
-  res.json({ data: [] })
+  try {
+    const { orgId } = req.params
+    const db = router.db
+    const anomalyService = db.get('anomaly-service').value()
+
+    const updatedAnomalyService = anomalyService.map((item) => {
+      if (item.orgId.toString() === orgId) {
+        return { ...item, read: false }
+      }
+      return item
+    })
+
+    db.set('anomaly-service', updatedAnomalyService).write()
+
+    res.json({ success: true })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+  
 })
 
 server.post('/anomaly-service/:orgId/mark-read', (req, res) => {
@@ -38,7 +65,7 @@ server.post('/anomaly-service/:orgId/mark-read', (req, res) => {
 
     res.json({ success: true })
   } catch (error) {
-    res.status(500).json({ success: true })
+    res.status(500).json(error)
   }
 })
 

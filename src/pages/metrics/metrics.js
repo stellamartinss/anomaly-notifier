@@ -14,7 +14,8 @@ const Metrics = () => {
         const response = await axios.get(
           `http://localhost:3001/anomaly-service/${notificationId}`,
         )
-        setNotification(response.data)
+        
+        setNotification(response.data.data)
       } catch (error) {
         console.error('Error fetching notification:', error)
       }

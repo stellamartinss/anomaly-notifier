@@ -1,30 +1,35 @@
 import { Dropdown, Row, Col } from 'react-bootstrap'
 import './style.css'
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+
+import {
+  markReadNotification,
+  markReadAllNotifications,
+} from '../api/notificationService'
 
 const Notification = ({
   notifications,
-  setNotifications
+  setNotifications,
+  getNotifications,
 }) => {
   const navigate = useNavigate()
 
-  const updateNotificationReadStatus = async (notification, markAll = false) => {
-    try {
-        const markAsRead = await axios.post(`http://localhost:3001/anomaly-service/${notification.id}/mark-read`)
+  const updateNotificationReadStatus = async (notification) => {
+    const markAsReadRequest = markReadNotification(notification.id)
 
-        if(markAsRead) {
-            const metricPageRoute = `/metrics/${notification.id}`
-            navigate(metricPageRoute)
-        }
-
-    } catch (error) {
-        console.error(`something went wrong ${error}`)
+    if (markAsReadRequest) {
+      getNotifications()
+      const metricPageRoute = `/metrics/${notification.id}`
+      navigate(metricPageRoute)
     }
+  }
 
-    
- 
+  const updateAllNotificationReadStatus = async () => {
+    const markAsRead = markReadAllNotifications()
+
+    if (markAsRead) {
+      getNotifications()
+    }
   }
 
   return (
@@ -79,7 +84,9 @@ const Notification = ({
             </>
           )
         })}
-        <Dropdown.Item href="/metrics">
+        <Dropdown.Item
+          onClick={() => updateAllNotificationReadStatus(null, true)}
+        >
           <Row>
             <Col sm={1}>
               <div className="form-check text-right">
@@ -88,7 +95,6 @@ const Notification = ({
                   className="form-check-input"
                   id="exampleRadio1"
                   name="exampleRadioGroup"
-                  onClick={() => updateNotificationReadStatus(null, true)}
                 />
               </div>
             </Col>

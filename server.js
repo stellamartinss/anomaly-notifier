@@ -19,7 +19,7 @@ server.use(jsonServer.bodyParser)
 
 server.get('/anomaly-service-all', (req, res) => {
   const allNotifications = router.db.get('anomaly-service').value()
-  res.json({ data: allNotifications })
+  res.json({ data: allNotifications.filter(item => !item.read) })
 })
 
 server.get('/anomaly-service/:orgId', (req, res) => {
@@ -49,7 +49,7 @@ server.get('/anomaly-service/:orgId/unread', (req, res) => {
       return item
     })
 
-    db.set('anomaly-service', updatedAnomalyService).write()
+    db.set('anomaly-service', updatedAnomalyService.filter(item => !!item.read)).write()
 
     res.json({ success: true })
   } catch (error) {
@@ -64,7 +64,7 @@ server.post('/anomaly-service/:orgId/mark-read', (req, res) => {
     const anomalyService = db.get('anomaly-service').value()
 
     const updatedAnomalyService = anomalyService.map((item) => {
-      if (item.orgId.toString() === orgId) {
+      if (item.id.toString() === orgId) {
         return { ...item, read: true }
       }
       return item
@@ -78,10 +78,21 @@ server.post('/anomaly-service/:orgId/mark-read', (req, res) => {
   }
 })
 
-server.post('/anomaly-service/:orgId/mark-read', (req, res) => {
-  const { messageId } = req.query
-  const recordIds = messageId.split(',').map(Number)
-  res.json({ success: true })
+server.post('/anomaly-service/mark-all-read', (req, res) => {
+  try {
+    const db = router.db
+    const anomalyService = db.get('anomaly-service').value()
+
+    const updatedAnomalyService = anomalyService.map((item) => {
+        return { ...item, read: true }
+    })
+
+    db.set('anomaly-service', updatedAnomalyService).write()
+
+    res.json({ success: true })
+  } catch (error) {
+    res.status(500).json(error)
+  }
 })
 
 server.use('/api', router)

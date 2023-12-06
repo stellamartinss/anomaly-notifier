@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
+import {
+  getNotification
+} from '../../components/api/notificationService'
 
 const Metrics = () => {
   const { notificationId } = useParams()
@@ -10,19 +12,17 @@ const Metrics = () => {
 
   useEffect(() => {
     
-    const getNotification = async () => {
+    const getNotificationData = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3001/anomaly-service/${notificationId}`
-        );
+        const response = await getNotification(notificationId)
 
-        setNotification(response.data.data)
+        setNotification(response)
       } catch (error) {
         console.error('Error fetching notification:', error)
       }
     }
 
-    getNotification()
+    getNotificationData()
   }, [notificationId])
 
   return (

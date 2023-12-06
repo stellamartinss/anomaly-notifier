@@ -6,18 +6,18 @@ import axios from 'axios'
 const Header = () => {
   const [notifications, setNotifications] = useState([])
 
-  useEffect(() => {
-    const getNotifications = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:3001/anomaly-service-all',
-        )
-        setNotifications(response.data.data)
-      } catch (error) {
-        console.error('Error fetching notifications:', error)
-      }
+  const getNotifications = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3001/anomaly-service-all',
+      )
+      setNotifications(response.data.data)
+    } catch (error) {
+      console.error('Error fetching notifications:', error)
     }
+  }
 
+  useEffect(() => {
     getNotifications()
   }, [])
 
@@ -35,6 +35,7 @@ const Header = () => {
         <Notification
           setNotifications={setNotifications}
           notifications={notifications}
+          getNotifications={getNotifications}
         />
       </Container>
     </Navbar>

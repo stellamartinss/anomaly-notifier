@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Container, Row, Col, Button } from 'react-bootstrap'
+import Header from './components/header/header.js'
+import 'bootstrap-icons/font/bootstrap-icons.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import Metrics from './pages/metrics/metrics.js'
+import Dashboard from './pages/dashboard/dashboard.js'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      <Header />
+      <Container>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/metrics/:notificationId" element={<Metrics />} />
+        </Routes>
+      </Container>
+    </Router>
+  )
 }
 
-export default App;
+export default App

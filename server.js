@@ -1,5 +1,14 @@
 const jsonServer = require('json-server')
+const cors = require('cors')
+
 const server = jsonServer.create()
+
+server.use(cors({ 
+  origin: '*',
+  allowedHeaders: ['Content-Type', 'X-Custom-Header'],
+}));
+server.options('*', cors())
+
 const router = jsonServer.router('./db.json')
 const middlewares = jsonServer.defaults()
 
@@ -19,8 +28,9 @@ server.get('/anomaly-service/:orgId', (req, res) => {
     const db = router.db
     const anomalyService = db.get('anomaly-service').value()
 
+    const notification = anomalyService.find(item => `${item.id}` === orgId)
 
-    res.json({ data: anomalyService })
+    res.json({ data: notification })
   } catch (error) {
     res.status(500).json(error)
   }
@@ -45,7 +55,6 @@ server.get('/anomaly-service/:orgId/unread', (req, res) => {
   } catch (error) {
     res.status(500).json(error)
   }
-  
 })
 
 server.post('/anomaly-service/:orgId/mark-read', (req, res) => {

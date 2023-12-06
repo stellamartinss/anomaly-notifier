@@ -4,25 +4,11 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const Notification = () => {
+const Notification = ({
+  notifications,
+  setNotifications
+}) => {
   const navigate = useNavigate()
-
-  const [notifications, setNotifications] = useState([])
-
-  useEffect(() => {
-    const getNotifications = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:300/anomaly-service',
-        )
-        setNotifications(response.data.data)
-      } catch (error) {
-        console.error('Error fetching notifications:', error)
-      }
-    }
-
-    getNotifications()
-  }, [])
 
   const updateNotificationReadStatus = async (notification, markAll = false) => {
     try {

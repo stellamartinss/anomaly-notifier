@@ -2,68 +2,67 @@
   "anomaly-service": [
     {
       "id": 1,
-      "icon": "bi bi-mailbox",
+      "icon": "bi bi-envelope",
       "title": "New Message",
-      "description": "You have a new message from a friend.",
+      "description": "<p>You have received a new <strong>message</strong> from a <em>dear friend</em>. The content is filled with warmth and excitement, carrying the essence of a cherished connection. The words dance on the screen, creating a tapestry of shared experiences and laughter. The anticipation builds as you eagerly open the message, savoring the joy of meaningful communication. This digital missive is a beacon of friendship, connecting hearts across the virtual expanse.</p>",
       "read": false,
       "orgId": 1
     },
     {
       "id": 2,
-      "icon": "bi bi-alarm",
+      "icon": "bi bi-person-plus",
       "title": "Friend Request",
-      "description": "You have a new friend request from John Doe.",
-      "read": true,
+      "description": "<p>Congratulations! You've just received a <strong>friend request</strong> from the one and only John Doe. This digital handshake opens the door to a world of new connections and shared moments. As you accept the invitation, you embark on a journey of expanding your social circle, discovering common interests, and fostering new relationships. John Doe's virtual presence adds a touch of excitement to your online community, promising engaging conversations and perhaps even the formation of lasting bonds.</p>",
+      "read": false,
       "orgId": 1
     },
     {
       "id": 3,
-      "icon": "bi bi-alarm",
+      "icon": "bi bi-calendar-event",
       "title": "Event Reminder",
-      "description": "Reminder: You have an upcoming event tomorrow.",
+      "description": "<p><strong>Reminder:</strong> Tomorrow holds a special event waiting to unfold its magic. Marked on your digital calendar, this upcoming occasion promises moments of joy, shared laughter, and memorable experiences. As the clock ticks closer to the event, anticipation grows, and you find yourself eagerly looking forward to the festivities that await. Embrace the excitement, as tomorrow becomes a canvas for creating beautiful memories.</p>",
       "read": false,
       "orgId": 2
     },
     {
       "id": 4,
-      "icon": "bi bi-alarm",
+      "icon": "bi bi-exclamation-diamond",
       "title": "Important Notice",
-      "description": "An important notice regarding your account.",
+      "description": "<p>An <em>important notice</em> demands your attention regarding a key aspect of your digital life—your account. Delve into the details provided, as this message holds crucial information that may impact your online experience. Stay informed, take necessary actions, and ensure the smooth sailing of your virtual journey. Your account's well-being is paramount, and this notice serves as a guardian, guiding you through the digital landscape.</p>",
       "read": false,
       "orgId": 3
     },
     {
       "id": 5,
-      "icon": "bi bi-alarm",
+      "icon": "bi bi-arrow-repeat",
       "title": "System Update",
-      "description": "A scheduled system update is planned for this weekend.",
+      "description": "<p>Exciting news awaits! A <strong>scheduled system update</strong> is on the horizon, planned meticulously for the upcoming weekend. Brace yourself for a wave of new features, enhanced functionalities, and an overall improved digital experience. This update reflects a commitment to staying at the forefront of technology, ensuring that your digital interactions are seamless, secure, and enriched. Embrace the future as your digital environment evolves and transforms with this upcoming system update.</p>",
       "read": false,
       "orgId": 4
     },
     {
       "id": 6,
-      "icon": "bi bi-chat-heart",
+      "icon": "bi bi-chat-dots",
       "title": "Meeting Invitation",
-      "description": "You've been invited to a team meeting next week.",
+      "description": "<p>You're cordially invited to a <strong>team meeting</strong> next week. This isn't just any ordinary gathering; it's an opportunity to collaborate, ideate, and strengthen the bonds within your professional community. The virtual meeting room becomes a space for exchanging ideas, fostering creativity, and collectively driving towards shared goals. Prepare to be inspired as you engage with colleagues, sharing insights and perspectives that contribute to the collective success of the team. Your presence adds value to the synergy of collaboration, making this meeting an essential rendezvous on your professional journey.</p>",
       "read": false,
       "orgId": 1
     },
     {
       "id": 7,
-      "icon": "bi bi-cash-coin",
+      "icon": "bi bi-cash-stack",
       "title": "Billing Statement",
-      "description": "Your monthly billing statement is now available.",
-      "read": true,
+      "description": "<p>Attention, valued customer! Your <strong>monthly billing statement</strong> has been meticulously crafted and is now available for your perusal. Dive into the details of your financial transactions, as this statement encapsulates a month's worth of activities, purchases, and financial decisions. Stay informed about your financial landscape, and should you have any queries or concerns, the digital corridors are open for communication. Navigate through the intricacies of your billing statement, ensuring financial clarity and peace of mind.</p>",
+      "read": false,
       "orgId": 2
     },
     {
       "id": 8,
-      "icon": "bi bi-alarm",
+      "icon": "bi bi-box",
       "title": "Product Update",
-      "description": "Explore the latest features in our product update.",
+      "description": "<p>Embark on a journey of discovery with our latest <strong>product update</strong>. Immerse yourself in the world of innovation as you explore cutting-edge features and enhancements designed to elevate your user experience. This update is a testament to our commitment to delivering excellence, pushing the boundaries of what's possible in the digital realm. Engage with the latest advancements, unlock new capabilities, and witness firsthand the evolution of our product. Your digital journey is about to be enriched, so embrace the excitement as you navigate through the possibilities unlocked by this transformative product update.</p>",
       "read": false,
       "orgId": 3
     }
-    
   ]
 }

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import {
-  getNotification
-} from '../../components/api/notificationService'
+import { getNotification } from '../../components/api/notificationService'
+import { Dropdown, Row, Col } from 'react-bootstrap'
 
 const Metrics = () => {
   const { notificationId } = useParams()
@@ -11,7 +10,6 @@ const Metrics = () => {
   const [notification, setNotification] = useState({})
 
   useEffect(() => {
-    
     const getNotificationData = async () => {
       try {
         const response = await getNotification(notificationId)
@@ -27,22 +25,32 @@ const Metrics = () => {
 
   return (
     <Container className="mt-5">
-      <h2>Anomaly Service #{notification.id}</h2>
+      <h2>#{notification?.id}</h2>
       <Card>
         <Card.Header>
-          <h5>
-            <i className={notification.icon}></i>
-            {notification.title}
-          </h5>
+          <Row>
+            <Col>
+              <h5>
+                <i className={notification?.icon}></i> {' '}
+                {notification?.title}
+              </h5>
+            </Col>
+            <Col className='text-end'>
+              <span className="badge bg-success">
+                {notification?.read ? 'read' : ''}
+              </span>
+            </Col>
+          </Row>
         </Card.Header>
         <Card.Body>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <strong>Description:</strong>
               <br />
-              <p>{notification.description}</p>
-
-              {notification.read ? 'Read' : ''}
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: notification?.description,
+                }}
+              ></div>
             </ListGroup.Item>
           </ListGroup>
         </Card.Body>

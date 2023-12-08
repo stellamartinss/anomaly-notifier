@@ -7,8 +7,14 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Metrics from './pages/metrics/metrics.js'
 import Dashboard from './pages/dashboard/dashboard.js'
+import React, { useEffect, useState } from 'react'
 
 function App() {
+  useEffect(() => {
+    const client = {name: 'Stella', id: '1'}
+    localStorage.setItem('client', JSON.stringify(client));
+  }, [])
+
   return (
     <Router>
       <Header />

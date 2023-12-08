@@ -19,13 +19,16 @@ const Notification = ({
 
     if (markAsReadRequest) {
       getNotifications()
+
       const metricPageRoute = `/metrics/${notification.id}`
+      
       navigate(metricPageRoute)
     }
   }
 
   const updateAllNotificationReadStatus = async () => {
-    const markAsRead = markReadAllNotifications()
+    const client = JSON.parse(localStorage.getItem("client"))
+    const markAsRead = markReadAllNotifications(client.id)
 
     if (markAsRead) {
       getNotifications()
@@ -50,7 +53,9 @@ const Notification = ({
                 style={{
                   background: !notification.read ? '#B6E2D3' : 'initial',
                 }}
-                onClick={() => updateNotificationReadStatus(notification)}
+                onClick={() => {
+                  updateNotificationReadStatus(notification)
+                }}
               >
                 <Row>
                   <Col sm={1}>
@@ -70,10 +75,15 @@ const Notification = ({
                           <i className={notification.icon}></i>
                         </span>
                         <strong> {notification.title}</strong>
-                        <p>{notification.description}</p>
+                        <div
+                        className='notification-description'
+                          dangerouslySetInnerHTML={{
+                            __html: `${notification.description?.substring(0, 100)}...`,
+                          }}
+                        ></div>
                       </Col>
                       <Col>
-                        {notification.read && (
+                        {(notification.read || notification.clicked) && (
                           <span className="badge bg-success">read</span>
                         )}
                       </Col>
@@ -84,27 +94,36 @@ const Notification = ({
             </>
           )
         })}
-        <Dropdown.Item
-          onClick={() => updateAllNotificationReadStatus(null, true)}
-        >
-          <Row>
-            <Col sm={1}>
-              <div className="form-check text-right">
-                <input
-                  type="radio"
-                  className="form-check-input"
-                  id="exampleRadio1"
-                  name="exampleRadioGroup"
-                />
-              </div>
-            </Col>
-            <Col sm={11}>
-              <Row>
-                <Col sm={12}>Mark all as read</Col>
-              </Row>
-            </Col>
-          </Row>
-        </Dropdown.Item>
+        {notifications.length > 0 && (
+          <Dropdown.Item
+            onClick={() => updateAllNotificationReadStatus(null, true)}
+          >
+            <Row>
+              <Col sm={1}>
+                <div className="form-check text-right">
+                  <input
+                    type="radio"
+                    className="form-check-input"
+                    id="exampleRadio1"
+                    name="exampleRadioGroup"
+                  />
+                </div>
+              </Col>
+              <Col sm={11}>
+                <Row>
+                  <Col sm={12}>Mark all as read</Col>
+                </Row>
+              </Col>
+            </Row>
+          </Dropdown.Item>
+        )}
+        {notifications.length === 0 && (
+          <Dropdown.Item
+            onClick={() => updateAllNotificationReadStatus(null, true)}
+          >
+            <em>You have no notifications</em>
+          </Dropdown.Item>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   )

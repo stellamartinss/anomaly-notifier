@@ -1,11 +1,13 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = 'http://localhost:3001/api'
+const CLIENT = JSON.parse(localStorage.getItem("client"))
 
 export const markReadNotification = async (notificationId) => {
   try {
+    const notificationIdList = [notificationId]
     const markAsRead = await axios.post(
-      `${BASE_URL}/anomaly-service/${notificationId}/mark-read`,
+      `${BASE_URL}/anomaly-service/${CLIENT.id}/mark-read?messageIds=[${notificationIdList.join(',')}]`,
     )
 
     return markAsRead.data.success
@@ -17,7 +19,7 @@ export const markReadNotification = async (notificationId) => {
 export const markReadAllNotifications = async () => {
   try {
     const markAsRead = await axios.post(
-      `${BASE_URL}/anomaly-service/mark-all-read`,
+      `${BASE_URL}/anomaly-service/${CLIENT.id}/mark-read`,
     )
     
     return markAsRead.data.success
@@ -29,7 +31,7 @@ export const markReadAllNotifications = async () => {
 export const getNotification = async (notificationId) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/anomaly-service/${notificationId}`,
+      `${BASE_URL}/anomaly-service/${CLIENT.id}/notification-details/${notificationId}`,
     )
     return response.data.data
   } catch (error) {

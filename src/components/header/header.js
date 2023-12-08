@@ -8,8 +8,10 @@ const Header = () => {
 
   const getNotifications = async () => {
     try {
+      const client = JSON.parse(localStorage.getItem("client"))
+      
       const response = await axios.get(
-        'http://localhost:3001/anomaly-service-all',
+        `http://localhost:3001/api/anomaly-service/${client.id}`,
       )
       setNotifications(response.data.data)
     } catch (error) {

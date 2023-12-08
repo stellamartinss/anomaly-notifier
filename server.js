@@ -24,7 +24,7 @@ server.get('/api/anomaly-service/:orgId', (req, res) => {
 
   const allNotifications = router.db.get('anomaly-service').value()
 
-  res.json({ data: allNotifications.filter((item) => item.orgId === +orgId) })
+  res.json({ data: allNotifications.filter((item) => item.orgId === +orgId && !item.read) })
 })
 
 server.get('/api/anomaly-service/:orgId/unread', (req, res) => {

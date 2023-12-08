@@ -1,18 +1,17 @@
-import logo from './logo.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Header from './components/header/header.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Metrics from './pages/metrics/metrics.js'
 import Dashboard from './pages/dashboard/dashboard.js'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 function App() {
   useEffect(() => {
-    const client = {name: 'Stella', id: '1'}
-    localStorage.setItem('client', JSON.stringify(client));
+    const client = { name: 'Stella', id: '1' }
+    localStorage.setItem('client', JSON.stringify(client))
   }, [])
 
   return (

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, ListGroup, Card } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { getNotification } from '../../components/api/notificationService'
-import { Dropdown, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 
 const Metrics = () => {
   const { notificationId } = useParams()
